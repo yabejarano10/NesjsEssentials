@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Event } from 'src/events/entities/event.entity';
-import { COFFEE_BRANDS } from './coffees.constants';
-import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entitites/coffee.entity';
 import { Flavor } from './entitites/flavor.entity';
+import coffeesConfig from './config/coffees.config';
+import { COFFEE_BRANDS } from './coffees.constants';
+import { Event } from 'src/events/entities/event.entity';
+import { CoffeesController } from './coffees.controller';
 
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Coffee,Flavor,Event])],
+    imports:[TypeOrmModule.forFeature([Coffee,Flavor,Event]), ConfigModule.forFeature(coffeesConfig)],
     controllers: [CoffeesController],
     providers: [CoffeesService,
     {provide: COFFEE_BRANDS,useFactory: () => ['buddy','nescafe']}],
