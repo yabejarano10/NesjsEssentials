@@ -6,12 +6,11 @@ import { Coffee } from './entitites/coffee.entity';
 import { Flavor } from './entitites/flavor.entity';
 import coffeesConfig from './config/coffees.config';
 import { COFFEE_BRANDS } from './coffees.constants';
-import { Event } from 'src/events/entities/event.entity';
 import { CoffeesController } from './coffees.controller';
 
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Coffee,Flavor,Event]), ConfigModule.forFeature(coffeesConfig)],
+    imports:[TypeOrmModule.forFeature([Coffee,Flavor]), ConfigModule.forFeature(coffeesConfig)],
     controllers: [CoffeesController],
     providers: [CoffeesService,
     {provide: COFFEE_BRANDS,useFactory: () => ['buddy','nescafe']}],
